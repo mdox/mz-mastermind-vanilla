@@ -6,6 +6,8 @@ A simplified MasterMind game written in Vanilla JavaScript.
 
 - Download the repository, redirect in your browser to the `index.html` absolute file path.
 - Or `$ npx serve` or any of such kind.
+- Or visit: https://mdox.github.io/mz-mastermind-vanilla/
+- Click on the bottom colors to choose colors for selected (or preselected) peg place.
 
 ## Development
 
