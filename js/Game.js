@@ -54,7 +54,7 @@ class Game {
    * @param {typeof COLORS[number]} color
    */
   handleColorChoosen(color) {
-    const accepted = this.sceneController.acceptColorToSelection(color);
+    const accepted = this.sceneController.acceptColorForSelection(color);
 
     if (!accepted) return;
 

@@ -1,5 +1,6 @@
 class SceneController {
   constructor() {
+    this.attemptIndex = 0;
     this.attemptBoxDOMs = getSceneBoardAttemptBoxDOMs();
     this.codePegDOMs = getSceneBoardCodeBoxPegDOMs();
 
@@ -12,10 +13,32 @@ class SceneController {
     });
   }
 
+  tryDeselect() {
+    const currSelectedAttemptPegDOM = this.getSelectedAttemptPegDOM();
+
+    if (currSelectedAttemptPegDOM) {
+      setPegDOMIsSelected(currSelectedAttemptPegDOM, false);
+    }
+  }
+
+  /**
+   * @param {number | undefined} attemptIndex
+   * @param {boolean} isDisabled
+   */
+  setAttemptPegDOMsIsDisabled(attemptIndex, isDisabled) {
+    if (attemptIndex === undefined) return;
+
+    const attemptPegDOMs = getSceneBoardAttemptBoxPegDOMs(attemptIndex);
+
+    attemptPegDOMs.forEach((attemptPegDOM) => {
+      setPegDOMIsDisabled(attemptPegDOM, isDisabled);
+    });
+  }
+
   /**
    * @param {typeof COLORS[number]} color
    */
-  acceptColorToSelection(color) {
+  acceptColorForSelection(color) {
     const currSelectedAttemptPegDOM = this.getSelectedAttemptPegDOM();
 
     if (!currSelectedAttemptPegDOM) return false;
@@ -26,17 +49,15 @@ class SceneController {
   }
 
   /**
-   * @param {number | undefined} attemptIndex
+   * @param {number | undefined} nextAttemptIndex
    */
-  acceptAttemptIndex(attemptIndex) {
-    this.attemptBoxDOMs.forEach((attemptBoxDOM) => {
-      const attemptBoxIndex = getDOMDatasetIndex(attemptBoxDOM);
-      const attemptPegDOMs = getSceneBoardAttemptBoxPegDOMs(attemptBoxIndex);
+  acceptAttemptIndex(nextAttemptIndex) {
+    this.tryDeselect();
 
-      attemptPegDOMs.forEach((attemptPegDOM) => {
-        setPegDOMIsDisabled(attemptPegDOM, attemptBoxIndex !== attemptIndex);
-      });
-    });
+    this.setAttemptPegDOMsIsDisabled(this.attemptIndex, true);
+    this.setAttemptPegDOMsIsDisabled(nextAttemptIndex, false);
+
+    this.attemptIndex = nextAttemptIndex;
   }
 
   /**
@@ -49,25 +70,16 @@ class SceneController {
   }
 
   trySelectNext() {
-    const attemptBoxDOM = this.getCurrentAttemptBoxDOM();
+    if (this.attemptIndex === undefined) return false;
 
-    if (!attemptBoxDOM) return false;
-
-    const attemptBoxIndex = getDOMDatasetIndex(attemptBoxDOM);
-    const attemptPegDOMs = getSceneBoardAttemptBoxPegDOMs(attemptBoxIndex);
+    const attemptPegDOMs = getSceneBoardAttemptBoxPegDOMs(this.attemptIndex);
 
     const nextAttemptPegDOMForSelection = attemptPegDOMs.find(
-      (attemptPegDOM) => {
-        return getPegDOMColor(attemptPegDOM) === "";
-      }
+      (attemptPegDOM) => getPegDOMColor(attemptPegDOM) === ""
     );
 
     if (nextAttemptPegDOMForSelection) {
-      const currSelectedAttemptPegDOM = this.getSelectedAttemptPegDOM();
-
-      if (currSelectedAttemptPegDOM) {
-        setPegDOMIsSelected(currSelectedAttemptPegDOM, false);
-      }
+      this.tryDeselect();
 
       setPegDOMIsSelected(nextAttemptPegDOMForSelection, true);
 
@@ -80,23 +92,17 @@ class SceneController {
   getCurrentAttemptBoxDOM() {
     return this.attemptBoxDOMs.find((attemptBoxDOM) => {
       const attemptBoxIndex = getDOMDatasetIndex(attemptBoxDOM);
-      const attemptPegDOMs = getSceneBoardAttemptBoxPegDOMs(attemptBoxIndex);
 
-      return !!attemptPegDOMs.find((attemptPegDOM) => {
-        return !getPegDOMIsDisabled(attemptPegDOM);
-      });
+      return attemptBoxIndex === this.attemptIndex;
     });
   }
 
   getCurrentAttempt() {
     const attempt = new Attempt();
 
-    const attemptBoxDOM = this.getCurrentAttemptBoxDOM();
+    if (this.attemptIndex === undefined) return attempt;
 
-    if (!attemptBoxDOM) return attempt;
-
-    const attemptBoxIndex = getDOMDatasetIndex(attemptBoxDOM);
-    const attemptPegDOMs = getSceneBoardAttemptBoxPegDOMs(attemptBoxIndex);
+    const attemptPegDOMs = getSceneBoardAttemptBoxPegDOMs(this.attemptIndex);
 
     attemptPegDOMs.forEach((attemptPegDOM, index) => {
       attempt.values[index] = getPegDOMColor(attemptPegDOM);
@@ -106,23 +112,16 @@ class SceneController {
   }
 
   /**
-   * @returns {HTMLElement | null}
+   * @returns {HTMLElement | undefined}
    */
   getSelectedAttemptPegDOM() {
-    let selectedAttemptPegDOM = null;
+    if (this.attemptIndex === undefined) return undefined;
 
-    this.attemptBoxDOMs.find((attemptBoxDOM) => {
-      const attemptBoxIndex = getDOMDatasetIndex(attemptBoxDOM);
-      const attemptPegDOMs = getSceneBoardAttemptBoxPegDOMs(attemptBoxIndex);
+    const attemptPegDOMs = getSceneBoardAttemptBoxPegDOMs(this.attemptIndex);
 
-      selectedAttemptPegDOM = attemptPegDOMs.find((attemptPegDOM) => {
-        return getPegDOMIsSelected(attemptPegDOM);
-      });
-
-      return !!selectedAttemptPegDOM;
+    return attemptPegDOMs.find((attemptPegDOM) => {
+      return getPegDOMIsSelected(attemptPegDOM);
     });
-
-    return selectedAttemptPegDOM;
   }
 
   // Handlers
