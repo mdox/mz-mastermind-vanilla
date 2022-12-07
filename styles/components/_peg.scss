@@ -46,6 +46,7 @@
 .scene .attempt .peg,
 .option .peg {
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .scene .code .peg {
@@ -75,5 +76,17 @@
     &[data-index="3"]::after {
       content: "😌";
     }
+  }
+}
+
+.option .peg {
+  transition: transform 0.25s ease-in-out;
+
+  &:hover {
+    transform: scale(0.925);
+  }
+
+  &:active {
+    transform: scale(1.15);
   }
 }
