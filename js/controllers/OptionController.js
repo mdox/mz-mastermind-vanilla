@@ -16,6 +16,10 @@ class OptionController {
       pegDOM.addEventListener("click", () => {
         this.onColorChoosen(color);
       });
+
+      pegDOM.addEventListener("contextmenu", (event) => {
+        event.preventDefault();
+      });
     });
   }
 }
