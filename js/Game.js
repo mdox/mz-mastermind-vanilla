@@ -8,6 +8,7 @@ class GameState {
 class Game {
   constructor() {
     this.state = new GameState();
+    this.playerSettings = new PlayerSettings();
     this.scoreController = new ScoreController();
     this.sceneController = new SceneController();
     this.optionController = new OptionController();
@@ -42,14 +43,25 @@ class Game {
     }
   }
 
+  /** @param {Attempt} attempt */
+  showAttemptColorScores(attempt) {
+    const colorScores = getColorScores(this.state.code, attempt);
+
+    if (this.playerSettings.shuffleScores) {
+      colorScores.sort(() => (Math.random() > 0.5 ? 1 : -1));
+    }
+
+    this.scoreController.acceptColorScoresForCurrentAttempt(colorScores);
+  }
+
   step() {
     const nextAttemptIndex = this.state.attemptIndex + 1;
 
     const attempt = this.sceneController.getCurrentAttempt();
-    const isCodeBroken = getIsCodeBrokenByAttempt(this.state.code, attempt);
-    const colorScores = getColorScores(this.state.code, attempt);
 
-    this.scoreController.acceptColorScoresForCurrentAttempt(colorScores);
+    this.showAttemptColorScores(attempt);
+
+    const isCodeBroken = getIsCodeBrokenByAttempt(this.state.code, attempt);
 
     if (isCodeBroken || nextAttemptIndex === MAX_ATTEMPTS) {
       this.end(isCodeBroken);

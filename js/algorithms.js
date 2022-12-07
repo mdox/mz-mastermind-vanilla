@@ -40,5 +40,5 @@ function getColorScores(code, attempt) {
     }
   });
 
-  return colorScores.sort(() => (Math.random() > 0.5 ? 1 : -1));
+  return colorScores;
 }
