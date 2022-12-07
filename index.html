@@ -14,6 +14,7 @@
     <script src="js/utils/Attempt.js"></script>
     <script src="js/utils/PlayerSettings.js"></script>
     <script src="js/algorithms.js"></script>
+    <script src="js/controllers/ButtonsController.js"></script>
     <script src="js/controllers/ScoreController.js"></script>
     <script src="js/controllers/SceneController.js"></script>
     <script src="js/controllers/OptionController.js"></script>
@@ -56,11 +57,17 @@
         <div class="message">
           <span class="text won">🥳 YOU WON! 🎉</span>
           <span class="text lost">💩 YOU LOST! 💁</span>
-          <button class="button" onclick="game.newGame()">New Game</button>
+          <div class="actions">
+            <div class="label">START NEW</div>
+            <div class="buttons">
+              <button class="button hard">Hard Game</button>
+              <button class="button easy">Easy Game</button>
+            </div>
+          </div>
         </div>
       </div>
 
-      <button class="button dim" onclick="game.restart()">Restart Game</button>
+      <button class="button dim restart">Restart Game</button>
     </main>
   </body>
 </html>

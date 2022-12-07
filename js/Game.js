@@ -9,22 +9,13 @@ class Game {
   constructor() {
     this.state = new GameState();
     this.playerSettings = new PlayerSettings();
+    this.buttonsController = new ButtonsController();
     this.scoreController = new ScoreController();
     this.sceneController = new SceneController();
     this.optionController = new OptionController();
     this.messageController = new MessageController();
 
     this.init();
-  }
-
-  restart() {
-    const restartIsConfirmedByInteraction = confirm(
-      "Are you sure you want to restart?"
-    );
-
-    if (restartIsConfirmedByInteraction) {
-      this.reset();
-    }
   }
 
   newGame() {
@@ -76,6 +67,26 @@ class Game {
   }
 
   // Handlers
+  handleNewEasyGame() {
+    this.playerSettings.shuffleScores = false;
+    this.newGame();
+  }
+
+  handleNewHardGame() {
+    this.playerSettings.shuffleScores = true;
+    this.newGame();
+  }
+
+  handleRestartGame() {
+    const restartIsConfirmedByInteraction = confirm(
+      "Are you sure you want to restart?"
+    );
+
+    if (restartIsConfirmedByInteraction) {
+      this.reset();
+    }
+  }
+
   /**
    * @param {typeof COLORS[number]} color
    */
@@ -101,6 +112,10 @@ class Game {
 
     this.optionController.onColorChoosen = (color) =>
       this.handleColorChoosen(color);
+
+    this.buttonsController.onNewEasyGame = () => this.handleNewEasyGame();
+    this.buttonsController.onNewHardGame = () => this.handleNewHardGame();
+    this.buttonsController.onRestartGame = () => this.handleRestartGame();
   }
 
   reset() {

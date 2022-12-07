@@ -157,6 +157,21 @@ function setDOMIsHidden(dom, isHidden) {
 }
 
 /** @returns {HTMLElement} */
+function getEasyGameButtonDOM() {
+  return document.querySelector(".button.easy");
+}
+
+/** @returns {HTMLElement} */
+function getHardGameButtonDOM() {
+  return document.querySelector(".button.hard");
+}
+
+/** @returns {HTMLElement} */
+function getRestartGameButtonDOM() {
+  return document.querySelector(".button.restart");
+}
+
+/** @returns {HTMLElement} */
 function getModalMessageLostTextDOM() {
   return getModalMessageDOM().querySelector(".lost");
 }
