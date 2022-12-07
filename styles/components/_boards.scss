@@ -10,7 +10,8 @@
     grid-template-columns: repeat(11, 1fr);
     gap: 0.5rem;
     padding: 0.5rem;
-    outline: solid 1px $--color-gray-600;
+    @include outlineMimic();
+    @include outlineMimicRadius(0.5rem);
     border-radius: 0.5rem;
   }
 

@@ -1,13 +1,13 @@
 .peg {
   border-radius: 100%;
   aspect-ratio: 1;
-  outline: solid 1px transparent;
-  outline-offset: 1px;
-  transition: background-color 0.5s ease-in-out, outline-color 0.5s ease-in-out,
-    opacity 0.5s ease-in-out;
+  @include outlineMimic();
+  @include outlineMimicColor(transparent);
+  @include outlineMimicRadius(100%);
+  transition: background-color 0.5s ease-in-out, opacity 0.5s ease-in-out;
 
   &:not([data-color]) {
-    outline: solid 1px $--color-gray-600;
+    @include outlineMimicColor($--color-gray-600);
   }
 
   &[data-color="red"] {

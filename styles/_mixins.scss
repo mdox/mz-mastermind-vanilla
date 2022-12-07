@@ -1,0 +1,32 @@
+@mixin outlineMimic() {
+  position: relative;
+
+  &::before {
+    content: "";
+    pointer-events: none;
+    display: block;
+    position: absolute;
+    top: calc(-1px - var(--outline-mimic-offset, 1px));
+    left: calc(-1px - var(--outline-mimic-offset, 1px));
+    bottom: calc(-1px - var(--outline-mimic-offset, 1px));
+    right: calc(-1px - var(--outline-mimic-offset, 1px));
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--outline-mimic-color, $--color-gray-600);
+    border-radius: var(--outline-mimic-radius, 0px);
+
+    transition: border-color 0.5s ease-in-out;
+  }
+}
+
+@mixin outlineMimicColor($--color: $--color-gray-600) {
+  --outline-mimic-color: #{$--color};
+}
+
+@mixin outlineMimicOffset($--offset: 1px) {
+  --outline-mimic-offset: #{$--offset};
+}
+
+@mixin outlineMimicRadius($--radius: 0.5rem) {
+  --outline-mimic-radius: #{$--radius};
+}

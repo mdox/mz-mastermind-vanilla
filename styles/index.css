@@ -31,8 +31,26 @@ main {
   grid-template-columns: repeat(11, 1fr);
   gap: 0.5rem;
   padding: 0.5rem;
-  outline: solid 1px #4b5563;
+  position: relative;
+  --outline-mimic-radius: 0.5rem;
   border-radius: 0.5rem;
+}
+.boards .score::before,
+.boards .scene::before,
+.boards .option::before {
+  content: "";
+  pointer-events: none;
+  display: block;
+  position: absolute;
+  top: calc(-1px - var(--outline-mimic-offset, 1px));
+  left: calc(-1px - var(--outline-mimic-offset, 1px));
+  bottom: calc(-1px - var(--outline-mimic-offset, 1px));
+  right: calc(-1px - var(--outline-mimic-offset, 1px));
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--outline-mimic-color, #4b5563);
+  border-radius: var(--outline-mimic-radius, 0px);
+  transition: border-color 0.5s ease-in-out;
 }
 .boards .score .box {
   display: grid;
@@ -53,12 +71,28 @@ main {
 .peg {
   border-radius: 100%;
   aspect-ratio: 1;
-  outline: solid 1px transparent;
-  outline-offset: 1px;
-  transition: background-color 0.5s ease-in-out, outline-color 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  position: relative;
+  --outline-mimic-color: transparent;
+  --outline-mimic-radius: 100%;
+  transition: background-color 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+.peg::before {
+  content: "";
+  pointer-events: none;
+  display: block;
+  position: absolute;
+  top: calc(-1px - var(--outline-mimic-offset, 1px));
+  left: calc(-1px - var(--outline-mimic-offset, 1px));
+  bottom: calc(-1px - var(--outline-mimic-offset, 1px));
+  right: calc(-1px - var(--outline-mimic-offset, 1px));
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--outline-mimic-color, #4b5563);
+  border-radius: var(--outline-mimic-radius, 0px);
+  transition: border-color 0.5s ease-in-out;
 }
 .peg:not([data-color]) {
-  outline: solid 1px #4b5563;
+  --outline-mimic-color: #4b5563;
 }
 .peg[data-color=red] {
   background-color: #ef4444;
@@ -168,7 +202,7 @@ main {
   padding: 0.5rem 0.75rem;
   background-color: #1f2937;
   border-radius: 0.5rem;
-  outline: 0;
+  outline: none 0px transparent;
 }
 .button.dim:hover {
   opacity: 1;
@@ -184,8 +218,7 @@ main {
 }
 
 .selected {
-  outline: solid 1px #3b82f6 !important;
-  outline-offset: 1px;
+  --outline-mimic-color: #3b82f6 !important;
 }
 
 .dim {
