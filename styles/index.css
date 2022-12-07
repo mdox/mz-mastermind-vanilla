@@ -17,6 +17,7 @@ main {
   margin: 0 auto;
   width: 100%;
   max-width: var(--max-width);
+  max-width: min(min(100vh, 100vw), var(--max-width));
 }
 
 .boards {
