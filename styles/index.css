@@ -184,19 +184,42 @@ main {
   gap: 2rem;
 }
 .message .text {
+  position: relative;
   padding: 1rem;
   border-radius: 0.5rem;
-  background-color: #1f2937;
+  background-color: rgba(31, 41, 55, 0.75);
   font-size: 1.5rem;
   font-weight: bold;
   word-spacing: 0.5rem;
   letter-spacing: 0.125rem;
 }
-.message .text.won {
-  box-shadow: 0 0 3rem #22c55e, inset 0 0 0.125rem #22c55e;
+.message .text.won::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  height: calc(100% + 4px);
+  width: calc(100% + 4px);
+  background: linear-gradient(60deg, #5073b8, #1098ad, #07b39b, #6fba82);
+  border-radius: 0.5rem;
+  z-index: -1;
+  -webkit-animation: animatedgradient 1s ease alternate infinite;
+          animation: animatedgradient 1s ease alternate infinite;
+  background-size: 300% 300%;
 }
-.message .text.lost {
-  box-shadow: 0 0 3rem #ef4444;
+.message .text.lost::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  height: calc(100% + 4px);
+  width: calc(100% + 4px);
+  background: linear-gradient(60deg, #f79533, #f37055, #ef4e7b, #a166ab);
+  border-radius: 0.5rem;
+  z-index: -1;
+  -webkit-animation: animatedgradient 1s ease alternate infinite;
+          animation: animatedgradient 1s ease alternate infinite;
+  background-size: 300% 300%;
 }
 .message .button {
   transition: box-shadow 0.25s ease-in-out, transform 0.25s ease-in-out;
@@ -206,6 +229,29 @@ main {
   transform: scale(1.15);
 }
 
+@-webkit-keyframes animatedgradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes animatedgradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
 .button {
   display: flex;
   align-items: center;
