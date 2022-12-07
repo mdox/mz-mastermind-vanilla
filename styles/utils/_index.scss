@@ -18,4 +18,6 @@
 
 .transparent {
   opacity: 0;
+  pointer-events: none;
+  z-index: -9999;
 }

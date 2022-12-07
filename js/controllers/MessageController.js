@@ -3,13 +3,6 @@ class MessageController {
     this.modalDOM = getModalDOM();
     this.wonTextDOM = getModalMessageWonTextDOM();
     this.lostTextDOM = getModalMessageLostTextDOM();
-
-    this.timeouts = [];
-  }
-
-  clearTimeouts() {
-    this.timeouts.forEach(clearTimeout);
-    this.timeouts = [];
   }
 
   showWonMessage() {
@@ -23,23 +16,14 @@ class MessageController {
   }
 
   show() {
-    this.clearTimeouts();
-    setDOMIsHidden(this.modalDOM, false);
-    this.timeouts.push(
-      setTimeout(() => setDOMIsTransparent(this.modalDOM, false), 1)
-    );
+    setDOMIsTransparent(this.modalDOM, false);
   }
 
   hide() {
-    this.clearTimeouts();
-    this.timeouts.push(
-      setTimeout(() => setDOMIsHidden(this.modalDOM, true), 500)
-    );
     setDOMIsTransparent(this.modalDOM, true);
   }
 
   reset() {
-    this.clearTimeouts();
     this.hide();
   }
 }
