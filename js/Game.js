@@ -16,6 +16,20 @@ class Game {
     this.init();
   }
 
+  restart() {
+    const restartIsConfirmedByInteraction = confirm(
+      "Are you sure you want to restart?"
+    );
+
+    if (restartIsConfirmedByInteraction) {
+      this.reset();
+    }
+  }
+
+  newGame() {
+    this.reset();
+  }
+
   end(isWin) {
     this.sceneController.showCode();
 
