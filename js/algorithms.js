@@ -10,35 +10,22 @@ function getIsCodeBrokenByAttempt(code, attempt) {
 /**
  * @param {Code} code
  * @param {Attempt} attempt
- * @returns {typeof COLORS[number][]}
+ * @returns {("white" | "black" | "")[]}
  */
 function getColorScores(code, attempt) {
   const colorScores = [];
 
-  /** @type {{[key: string]: {count: number, positions: number[]}}} */
-  const codeInfoMap = {};
-
-  code.values.forEach((value, index) => {
-    if (!codeInfoMap[value]) {
-      codeInfoMap[value] = {
-        count: 0,
-        positions: [],
-      };
-    }
-
-    codeInfoMap[value].count++;
-    codeInfoMap[value].positions.push(index);
-  });
+  const codeInfoMap = code.infoMap;
 
   attempt.values.forEach((attemptValue, attemptValueIndex) => {
     const codeInfo = codeInfoMap[attemptValue];
 
-    const hasColorMatchingLeft = codeInfo && codeInfo.count !== 0;
+    const hasColorMatchingLeft = codeInfo && codeInfo.recurrence !== 0;
     const isPositionMatching =
       codeInfo && codeInfo.positions.includes(attemptValueIndex);
 
     if (hasColorMatchingLeft && isPositionMatching) {
-      codeInfo.count--;
+      codeInfo.recurrence--;
       codeInfo.positions.splice(
         codeInfo.positions.indexOf(attemptValueIndex),
         1
@@ -46,7 +33,7 @@ function getColorScores(code, attempt) {
 
       colorScores.push("white");
     } else if (hasColorMatchingLeft) {
-      codeInfo.count--;
+      codeInfo.recurrence--;
       colorScores.push("black");
     } else {
       colorScores.push("");
