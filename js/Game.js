@@ -82,7 +82,6 @@ class Game {
 
     this.scoreController.reset();
     this.sceneController.reset();
-    this.optionController.reset();
 
     this.sceneController.acceptCode(this.state.code);
     this.sceneController.acceptAttemptIndex(this.state.attemptIndex);

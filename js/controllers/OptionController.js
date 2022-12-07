@@ -6,7 +6,7 @@ class OptionController {
     this.init();
   }
 
-  // Init / Reset
+  // Init
   init() {
     this.pegDOMs.forEach((pegDOM, index) => {
       const color = COLORS[index];
@@ -16,13 +16,6 @@ class OptionController {
       pegDOM.addEventListener("click", () => {
         this.onColorChoosen(color);
       });
-    });
-  }
-
-  reset() {
-    this.pegDOMs.forEach((pegDOM) => {
-      setPegDOMIsSelected(pegDOM, false);
-      setPegDOMIsDisabled(pegDOM, false);
     });
   }
 }
