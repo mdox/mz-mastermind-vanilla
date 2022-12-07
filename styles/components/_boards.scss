@@ -1,0 +1,38 @@
+.boards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+
+  .score,
+  .scene,
+  .option {
+    display: grid;
+    grid-template-columns: repeat(11, 1fr);
+    gap: 0.5rem;
+    padding: 0.5rem;
+    outline: solid 1px $--color-gray-600;
+    border-radius: 0.5rem;
+  }
+
+  .score {
+    .box {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+    }
+  }
+
+  .scene {
+    .box {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+  }
+
+  .option {
+    display: grid;
+    grid-template-columns: repeat(11, 1fr);
+    gap: 0.5rem;
+  }
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
+    <title>MasterMind</title>
+    <link rel="stylesheet" href="styles/preflight.min.css" />
+    <link rel="stylesheet" href="styles/index.css" />
+    <script src="js/consts.js"></script>
+    <script src="js/dom.js"></script>
+    <script src="js/utils/Code.js"></script>
+    <script src="js/utils/Attempt.js"></script>
+    <script src="js/algorithms.js"></script>
+    <script src="js/controllers/ScoreController.js"></script>
+    <script src="js/controllers/SceneController.js"></script>
+    <script src="js/controllers/OptionController.js"></script>
+    <script src="js/controllers/MessageController.js"></script>
+    <script src="js/Game.js"></script>
+    <script src="js/index.js"></script>
+  </head>
+  <body onload="load()">
+    <main>
+      <div class="boards">
+        <div class="board score">
+          <div class="box" data-index="0" data-instances-count="10">
+            <div class="peg" data-index="0" data-instances-count="4"></div>
+          </div>
+        </div>
+        <div class="board scene">
+          <div class="box attempt" data-index="0" data-instances-count="10">
+            <div
+              class="peg"
+              tabindex="0"
+              data-index="0"
+              data-instances-count="4"
+            ></div>
+          </div>
+          <div class="box code">
+            <div class="peg" data-index="0" data-instances-count="4"></div>
+          </div>
+        </div>
+        <div class="board option">
+          <div
+            class="peg"
+            tabindex="0"
+            data-index="0"
+            data-instances-count="8"
+          ></div>
+        </div>
+      </div>
+
+      <div class="modal hidden transparent">
+        <div class="message">
+          <span class="text won">🥳 YOU WON! 🎉</span>
+          <span class="text lost">💩 YOU LOST! 💁</span>
+          <button class="button" onclick="game.reset()">New Game</button>
+        </div>
+      </div>
+
+      <button class="button dim" onclick="game.reset()">Restart Game</button>
+    </main>
+  </body>
+</html>

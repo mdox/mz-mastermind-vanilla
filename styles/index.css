@@ -1,0 +1,198 @@
+@charset "UTF-8";
+body {
+  padding: 0.5rem;
+  background-color: #111827;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #f9fafb;
+}
+
+main {
+  --max-width: 768px;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+  margin: 0 auto;
+  width: 100%;
+  max-width: var(--max-width);
+}
+
+.boards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+}
+.boards .score,
+.boards .scene,
+.boards .option {
+  display: grid;
+  grid-template-columns: repeat(11, 1fr);
+  gap: 0.5rem;
+  padding: 0.5rem;
+  outline: solid 1px #4b5563;
+  border-radius: 0.5rem;
+}
+.boards .score .box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+.boards .scene .box {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+}
+.boards .option {
+  display: grid;
+  grid-template-columns: repeat(11, 1fr);
+  gap: 0.5rem;
+}
+
+.peg {
+  border-radius: 100%;
+  aspect-ratio: 1;
+  outline: solid 1px transparent;
+  outline-offset: 1px;
+  transition: background-color 0.5s ease-in-out, outline-color 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+.peg:not([data-color]) {
+  outline: solid 1px #4b5563;
+}
+.peg[data-color=red] {
+  background-color: #ef4444;
+}
+.peg[data-color=blue] {
+  background-color: #3b82f6;
+}
+.peg[data-color=yellow] {
+  background-color: #eab308;
+}
+.peg[data-color=white] {
+  background-color: white;
+}
+.peg[data-color=green] {
+  background-color: #22c55e;
+}
+.peg[data-color=brown] {
+  background-color: #bfa094;
+}
+.peg[data-color=purple] {
+  background-color: #a855f7;
+}
+.peg[data-color=black] {
+  background-color: black;
+}
+
+.scene .attempt .peg,
+.option .peg {
+  cursor: pointer;
+}
+
+.scene .code .peg:not(.unveiled) {
+  position: relative;
+  background-color: #1f2937 !important;
+  overflow: hidden;
+}
+.scene .code .peg:not(.unveiled)::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.scene .code .peg:not(.unveiled)[data-index="0"]::after {
+  content: "😁";
+}
+.scene .code .peg:not(.unveiled)[data-index="1"]::after {
+  content: "🙈";
+}
+.scene .code .peg:not(.unveiled)[data-index="2"]::after {
+  content: "🛐";
+}
+.scene .code .peg:not(.unveiled)[data-index="3"]::after {
+  content: "😌";
+}
+
+.modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(17, 24, 39, 0.5);
+  transition: opacity 0.5s ease-in-out, transform 0.25s ease-in-out;
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+.message .text {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: #1f2937;
+  font-size: 1.5rem;
+  font-weight: bold;
+  word-spacing: 0.5rem;
+  letter-spacing: 0.125rem;
+}
+.message .text.won {
+  box-shadow: 0 0 3rem #22c55e, inset 0 0 0.125rem #22c55e;
+}
+.message .text.lost {
+  box-shadow: 0 0 3rem #ef4444, inset 0 0 0.125rem #ef4444;
+}
+.message .button {
+  transition: box-shadow 0.25s ease-in-out, transform 0.25s ease-in-out;
+}
+.message .button:hover {
+  box-shadow: 0 0 1rem 0.25rem #a855f7, inset 0 0 0.25rem #a855f7;
+  transform: scale(1.15);
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  padding: 0.5rem 0.75rem;
+  background-color: #1f2937;
+  border-radius: 0.5rem;
+  outline: 0;
+}
+.button.dim:hover {
+  opacity: 1;
+}
+
+.hidden {
+  display: none;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.selected {
+  outline: solid 1px #3b82f6 !important;
+  outline-offset: 1px;
+}
+
+.dim {
+  transition: opacity 0.25s ease-in;
+  opacity: 0.3;
+}
+
+.transparent {
+  opacity: 0;
+}

@@ -1,0 +1,79 @@
+.peg {
+  border-radius: 100%;
+  aspect-ratio: 1;
+  outline: solid 1px transparent;
+  outline-offset: 1px;
+  transition: background-color 0.5s ease-in-out, outline-color 0.5s ease-in-out,
+    opacity 0.5s ease-in-out;
+
+  &:not([data-color]) {
+    outline: solid 1px $--color-gray-600;
+  }
+
+  &[data-color="red"] {
+    background-color: $--color-red-500;
+  }
+
+  &[data-color="blue"] {
+    background-color: $--color-blue-500;
+  }
+
+  &[data-color="yellow"] {
+    background-color: $--color-yellow-500;
+  }
+
+  &[data-color="white"] {
+    background-color: $--color-white;
+  }
+
+  &[data-color="green"] {
+    background-color: $--color-green-500;
+  }
+
+  &[data-color="brown"] {
+    background-color: $--color-brown-500;
+  }
+
+  &[data-color="purple"] {
+    background-color: $--color-purple-500;
+  }
+
+  &[data-color="black"] {
+    background-color: $--color-black;
+  }
+}
+
+.scene .attempt .peg,
+.option .peg {
+  cursor: pointer;
+}
+
+.scene .code .peg {
+  &:not(.unveiled) {
+    position: relative;
+    background-color: $--color-gray-800 !important;
+    overflow: hidden;
+    &::after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    &[data-index="0"]::after {
+      content: "😁";
+    }
+    &[data-index="1"]::after {
+      content: "🙈";
+    }
+    &[data-index="2"]::after {
+      content: "🛐";
+    }
+    &[data-index="3"]::after {
+      content: "😌";
+    }
+  }
+}
