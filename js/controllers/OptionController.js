@@ -13,9 +13,9 @@ class OptionController {
 
       setPegDOMColor(pegDOM, color);
 
-      pegDOM.onclick = () => {
+      pegDOM.addEventListener("click", () => {
         this.onColorChoosen(color);
-      };
+      });
     });
   }
 

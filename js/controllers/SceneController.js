@@ -151,9 +151,9 @@ class SceneController {
       attemptPegDOMs.forEach((attemptPegDOM) => {
         setPegDOMIsDisabled(attemptPegDOM, true);
 
-        attemptPegDOM.onclick = () => {
+        attemptPegDOM.addEventListener("click", () => {
           this.handleClick(attemptPegDOM);
-        };
+        });
       });
     });
   }
