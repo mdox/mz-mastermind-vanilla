@@ -1,4 +1,4 @@
-# mz-mastermind-vanilla.mdox.github.io
+# mz-mastermind-vanilla
 
 A simplified MasterMind game written in Vanilla JavaScript.
 
