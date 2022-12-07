@@ -14,3 +14,4 @@ A simplified MasterMind game written in Vanilla JavaScript.
 - [x] Mostly Functional Programming (faster to implement, maintain)
 - [x] Slightly ES6 (it is modern days)
 - [x] SCSS (using [Live Sass Compiler](https://marketplace.visualstudio.com/items?itemName=glenn2223.live-sass))
+
